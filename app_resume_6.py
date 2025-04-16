@@ -198,7 +198,9 @@ def generate_pdf(text):
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font("Arial", size=12)
-    pdf.multi_cell(0, 10, text)
+    # Conversion du texte en ASCII pour éviter les problèmes d'encodage avec Latin‑1
+    text_ascii = unidecode(text)
+    pdf.multi_cell(0, 10, text_ascii)
     pdf_bytes = pdf.output(dest="S").encode("latin1")
     return pdf_bytes
 
